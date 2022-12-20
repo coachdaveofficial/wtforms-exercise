@@ -18,5 +18,5 @@ class Pet(db.Model):
     species = db.Column(db.String(50), nullable=False)
     photo_url = db.Column(db.String(), nullable=True, default='https://thecontemporarypet.com/wp-content/themes/contemporarypet/images/default.png')
     age = db.Column(db.Integer, nullable=True)
-    notes = db.Column(db.String(250), nullable=True)
+    notes = db.Column(db.String(250), nullable=True, default='No notes yet!')
     available = db.Column(db.Boolean, unique=False, default=True)
