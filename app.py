@@ -30,7 +30,7 @@ def home_page():
     return render_template('homepage.html', pets=pets)
 
 @app.route("/add/", methods=["GET", "POST"])
-def add_pet():
+def add_pet_form():
     
     form = PetForm()
 
@@ -40,6 +40,18 @@ def add_pet():
         photo_url = form.photo_url.data
         age = form.age.data
         notes = form.notes.data
+
+        if len(photo_url) == 0:
+            photo_url = None
+        
+        pet = Pet(name=name, 
+                species=species, 
+                photo_url=photo_url, 
+                age=age, 
+                notes=notes)
+
+        db.session.add(pet)
+        db.session.commit()
         return redirect('/')
     else:
-        return render_template('/pet_add_form/')
+        return render_template('pet_add_form.html', form=form)

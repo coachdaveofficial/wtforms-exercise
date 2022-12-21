@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntField
+from wtforms import StringField, IntegerField
 from wtforms.validators import InputRequired, Optional, Email
 
 class PetForm(FlaskForm):
@@ -11,7 +11,7 @@ class PetForm(FlaskForm):
                         validators=[InputRequired()])
     photo_url = StringField("Profile Picture",
                         validators=[Optional()])
-    age = IntField("Age",
+    age = IntegerField("Age",
                         validators=[Optional()])
     notes = StringField("Notes",
                         validators=[Optional()])
