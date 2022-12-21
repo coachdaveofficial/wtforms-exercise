@@ -10,6 +10,13 @@
         <div class="col">
             <h2>Edit a pet!</h2>
 
+            <div class="card" style="width: 18rem;">
+                <img src="{{pet.photo_url}}" class="card-img-top img-responsive" alt="Pet Profile Picture">
+                <div class="card-body">
+                    <h5 class="card-title">{{pet.name}}</h5>
+                </div>
+            </div>
+
             <form method="POST">
                 <div class="mb-4 mt-4">
                     {{ form.hidden_tag() }} <!--add type=hidden form fields -->

@@ -62,22 +62,16 @@ def edit_pet_form(pet_id):
     form = PetForm(obj=pet)
 
     if form.validate_on_submit():
-        name = form.name.data
-        species = form.species.data
-        photo_url = form.photo_url.data
-        age = form.age.data
-        notes = form.notes.data
+        pet.name = form.name.data
+        pet.species = form.species.data
+        pet.photo_url = form.photo_url.data
+        pet.age = form.age.data
+        pet.notes = form.notes.data
 
-        if len(photo_url) == 0:
-            photo_url = None
-
-        pet = Pet(name=name, 
-                    species=species, 
-                    photo_url=photo_url, 
-                    age=age, 
-                    notes=notes)
+        if len(pet.photo_url) == 0:
+            pet.photo_url = None
 
         db.session.commit()
         return redirect('/')
     else:
-        return render_template('edit_pet_form.html', form=form)
+        return render_template('edit_pet_form.html', form=form, pet=pet)
