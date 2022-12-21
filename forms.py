@@ -14,7 +14,7 @@ class PetForm(FlaskForm):
     species = StringField("Species",
                         validators=[InputRequired(message="Species cannot be blank")])
     photo_url = StringField("Profile Picture",
-                        validators=[Optional(), URL()])
+                        validators=[Optional(), URL(message="Please provide valid URL")])
     age = IntegerField("Age",
                         validators=[Optional(), NumberRange(max=30)])
     notes = StringField("Notes",
