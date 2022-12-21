@@ -3,7 +3,7 @@ from models import db, connect_db, Pet
 from flask_debugtoolbar import DebugToolbarExtension
 from services import get_all_pets, get_pet_by_id
 from seed import seed_data
-from forms import PetForm
+from forms import PetForm, EditPetForm
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///adoption_agency'
@@ -59,13 +59,12 @@ def add_pet_form():
 @app.route('/<int:pet_id>/', methods=['GET', 'POST'])
 def edit_pet_form(pet_id):
     pet = get_pet_by_id(pet_id)
-    form = PetForm(obj=pet)
+    form = EditPetForm(obj=pet)
+    
 
     if form.validate_on_submit():
-        pet.name = form.name.data
-        pet.species = form.species.data
         pet.photo_url = form.photo_url.data
-        pet.age = form.age.data
+        pet.available = form.available.data
         pet.notes = form.notes.data
 
         if len(pet.photo_url) == 0:
