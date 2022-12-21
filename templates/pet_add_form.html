@@ -21,7 +21,8 @@
                     <div class="form-group">
                         {{ field.label (class_="form-label")}}
                         {{ field (class_="form-control")}}
-                
+                    </div>
+                    <div class="form-text text-danger">
                         {% for error in field.errors %}
                         {{ error }}
                         {% endfor %}
