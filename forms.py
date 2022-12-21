@@ -1,18 +1,18 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, ValidationError
-from wtforms.validators import InputRequired, Optional, NumberRange, URL, EqualTo
+from wtforms.validators import InputRequired, Optional, NumberRange, URL
 
 def pet_check(form, field):
     if field.data.lower() not in ['cat', 'dog', 'porcupine']:
-        raise ValidationError('Species must be either cat, dog, or porcupine')
+        raise ValidationError(f'Species must be either cat, dog, or porcupine')
 
 class PetForm(FlaskForm):
     """Form for adding/editing Pet."""
 
     name = StringField("Name",
-                       validators=[InputRequired(message="Pet name cannot be blank."), pet_check])
+                       validators=[InputRequired(message="Pet name cannot be blank.")])
     species = StringField("Species",
-                        validators=[InputRequired(message="Species cannot be blank")])
+                        validators=[InputRequired(message="Species cannot be blank"), pet_check])
     photo_url = StringField("Profile Picture",
                         validators=[Optional(), URL(message="Please provide valid URL")])
     age = IntegerField("Age",

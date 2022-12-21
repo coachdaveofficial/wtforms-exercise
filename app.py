@@ -1,7 +1,7 @@
 from flask import Flask, request, redirect, render_template
 from models import db, connect_db, Pet
 from flask_debugtoolbar import DebugToolbarExtension
-from services import get_all_pets
+from services import get_all_pets, get_pet_by_id
 from seed import seed_data
 from forms import PetForm
 
@@ -55,3 +55,30 @@ def add_pet_form():
         return redirect('/')
     else:
         return render_template('pet_add_form.html', form=form)
+
+@app.route('/<int:pet_id>/', methods=['GET', 'POST'])
+def edit_pet_form(pet_id):
+    pet = get_pet_by_id(pet_id)
+    form = PetForm(obj=pet)
+
+    if form.validate_on_submit():
+        name = form.name.data
+        species = form.species.data
+        photo_url = form.photo_url.data
+        age = form.age.data
+        notes = form.notes.data
+
+        if len(photo_url) == 0:
+            photo_url = None
+
+        pet = Pet(name=name, 
+                    species=species, 
+                    photo_url=photo_url, 
+                    age=age, 
+                    notes=notes)
+
+        db.session.add(pet)
+        db.session.commit()
+        return redirect('/')
+    else:
+        return render_template('edit_pet_form.html', form=form)
