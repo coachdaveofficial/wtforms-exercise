@@ -77,7 +77,6 @@ def edit_pet_form(pet_id):
                     age=age, 
                     notes=notes)
 
-        db.session.add(pet)
         db.session.commit()
         return redirect('/')
     else:
