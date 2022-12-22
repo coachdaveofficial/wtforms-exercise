@@ -25,8 +25,8 @@ class EditPetForm(FlaskForm):
    
     photo_url = StringField("Profile Picture",
                         validators=[Optional(), URL(message="Please provide valid URL")])
-    available = BooleanField("Available",
-                        validators=[Optional()])
     notes = StringField("Notes",
+                        validators=[Optional()])
+    available = BooleanField("Available",
                         validators=[Optional()])
         
