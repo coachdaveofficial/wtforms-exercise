@@ -10,6 +10,7 @@ def connect_db(app):
 
 
 class Pet(db.Model):
+    """Pet."""
 
     __tablename__ = 'pets'
 

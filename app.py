@@ -24,6 +24,7 @@ with app.app_context():
 
 @app.route('/')
 def home_page():
+    '''Render homepage and show pets'''
 
     pets = get_all_pets()
 
