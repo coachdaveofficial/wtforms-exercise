@@ -60,6 +60,7 @@ def add_pet_form():
 def edit_pet_form(pet_id):
     pet = get_pet_by_id(pet_id)
     form = EditPetForm(obj=pet)
+    orig_photo_url = pet.photo_url
     
 
     if form.validate_on_submit():
@@ -68,7 +69,7 @@ def edit_pet_form(pet_id):
         pet.notes = form.notes.data
 
         if len(pet.photo_url) == 0:
-            pet.photo_url = None
+            pet.photo_url = orig_photo_url
 
         db.session.commit()
         return redirect('/')

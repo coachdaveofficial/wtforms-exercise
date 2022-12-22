@@ -13,7 +13,7 @@ class PetForm(FlaskForm):
                        validators=[InputRequired(message="Pet name cannot be blank.")])
     species = StringField("Species",
                         validators=[InputRequired(message="Species cannot be blank"), pet_check])
-    photo_url = StringField("Profile Picture",
+    photo_url = StringField("Profile Picture URL",
                         validators=[Optional(), URL(message="Please provide valid URL")])
     age = IntegerField("Age",
                         validators=[Optional(), NumberRange(max=30)])
@@ -23,7 +23,7 @@ class EditPetForm(FlaskForm):
     """Form for editing Pet."""
 
    
-    photo_url = StringField("Profile Picture",
+    photo_url = StringField("Profile Picture URL",
                         validators=[Optional(), URL(message="Please provide valid URL")])
     notes = StringField("Notes",
                         validators=[Optional()])
