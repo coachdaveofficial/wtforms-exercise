@@ -6,10 +6,10 @@ def pet_check(form, field):
     if field.data.lower() not in ['cat', 'dog', 'porcupine']:
         raise ValidationError(f'Species must be either cat, dog, or porcupine')
 
-def check_if_blank(form, field):
-    field.data = ''.join(field.data.split())
-    if len(field.data) == 0:
-        raise ValidationError('This input cannot be blank, please insert valid characters')
+# def check_if_blank(form, field):
+#     field.data = ''.join(field.data.split())
+#     if len(field.data) == 0:
+#         raise ValidationError('This input cannot be blank, please insert valid characters')
 class PetForm(FlaskForm):
     """Form for adding Pet."""
 
@@ -28,7 +28,7 @@ class EditPetForm(FlaskForm):
 
    
     photo_url = StringField("Profile Picture URL",
-                        validators=[Optional(), URL(message="Please provide valid URL"), check_if_blank])
+                        validators=[Optional(), URL(message="Please provide valid URL")])
     notes = StringField("Notes",
                         validators=[Optional()])
     available = BooleanField("Available",
