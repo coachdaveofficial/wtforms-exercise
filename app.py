@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, flash
 from models import db, connect_db, Pet
 from flask_debugtoolbar import DebugToolbarExtension
 from services import get_all_pets, get_pet_by_id
@@ -53,6 +53,7 @@ def add_pet_form():
 
         db.session.add(pet)
         db.session.commit()
+        flash('Successfully added pet!')
         return redirect('/')
     else:
         return render_template('pet_add_form.html', form=form)
@@ -75,6 +76,7 @@ def edit_pet_form(pet_id):
             pet.photo_url = orig_photo_url
 
         db.session.commit()
+        flash('Successfully edited pet!')
         return redirect('/')
     else:
         return render_template('edit_pet_form.html', form=form, pet=pet)
