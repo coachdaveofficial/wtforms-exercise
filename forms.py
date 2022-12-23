@@ -1,11 +1,15 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, ValidationError, BooleanField
-from wtforms.validators import InputRequired, Optional, NumberRange, URL
+from wtforms.validators import InputRequired, Optional, NumberRange, URL, Regexp
 
 def pet_check(form, field):
     if field.data.lower() not in ['cat', 'dog', 'porcupine']:
         raise ValidationError(f'Species must be either cat, dog, or porcupine')
 
+def check_if_blank(form, field):
+    field.data = ''.join(field.data.split())
+    if len(field.data) == 0:
+        raise ValidationError('This input cannot be blank, please insert valid characters')
 class PetForm(FlaskForm):
     """Form for adding Pet."""
 
@@ -24,7 +28,7 @@ class EditPetForm(FlaskForm):
 
    
     photo_url = StringField("Profile Picture URL",
-                        validators=[Optional(), URL(message="Please provide valid URL")])
+                        validators=[Optional(), URL(message="Please provide valid URL"), check_if_blank])
     notes = StringField("Notes",
                         validators=[Optional()])
     available = BooleanField("Available",

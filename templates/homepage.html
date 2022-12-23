@@ -5,8 +5,13 @@
 
 {% block content %}
 
+
     <div class="container mt-4">
-        <div class="row">
+        <h1 class=""> Pet Adoption Agency</h1>
+        <div class="row justify-content-evenly">
+            <div class="col-4 align-self-center text-center">
+                <a href="/add" class="btn btn-primary btn-lg mt-4 mb-4">Add Pet</a>
+            </div>
             {% for pet in pets %}
                 <div class="col-lg-4">
                     <div class="card m-2" style="width: 18rem;">
@@ -27,9 +32,7 @@
                 </div>
             {% endfor %}
         </div>
-        
-        <a href="/add" class="btn btn-primary mt-4 mb-4">Add Pet</a>
-        
     </div>
+    
 
 {% endblock %}
