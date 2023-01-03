@@ -63,7 +63,7 @@ def edit_pet_form(pet_id):
     
 
     if form.validate_on_submit():
-        pet.photo_url = form.photo_url.data
+        pet.photo_url = form.photo_url.data or None
         pet.available = form.available.data
         pet.notes = form.notes.data
 
